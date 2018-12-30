@@ -11,13 +11,13 @@ import javax.persistence.Id;
 public class Trip {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private Integer vehicleId;
+	private int vehicleId;
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer tripNo;
+	private int tripNo;
 	private Duration duration;
 	
 	protected Trip() {}
@@ -35,19 +35,19 @@ public class Trip {
 		this.id = id;
 	}
 
-	public Integer getVehicleId() {
+	public int getVehicleId() {
 		return vehicleId;
 	}
 
-	public void setVehicleId(Integer vehicleId) {
+	public void setVehicleId(int vehicleId) {
 		this.vehicleId = vehicleId;
 	}
 
-	public Integer getTripNo() {
+	public int getTripNo() {
 		return tripNo;
 	}
 
-	public void setTripNo(Integer tripNo) {
+	public void setTripNo(int tripNo) {
 		this.tripNo = tripNo;
 	}
 

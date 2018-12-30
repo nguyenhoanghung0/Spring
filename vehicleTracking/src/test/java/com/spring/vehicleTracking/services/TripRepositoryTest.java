@@ -1,4 +1,4 @@
-package com.spring.vehicleTracking;
+package com.spring.vehicleTracking.services;
 
 import static org.junit.Assert.assertEquals;
 

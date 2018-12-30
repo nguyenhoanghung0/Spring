@@ -4,15 +4,16 @@ public class ConfigurationForm {
 	
 	private int writerPeriod;
 	private int readerPeriod;
-	private int numberOfVehicle;
+	private int numberOfVehicles;
 	
 	public ConfigurationForm() {
 		
 	}
 	
-	public ConfigurationForm(int writerPeriod, int readerPeriod) {
+	public ConfigurationForm(int writerPeriod, int readerPeriod, int numberOfVehicles) {
 		this.writerPeriod = writerPeriod;
 		this.readerPeriod = readerPeriod;
+		this.numberOfVehicles = numberOfVehicles;
 	}
 
 	public int getWriterPeriod() {
@@ -31,11 +32,11 @@ public class ConfigurationForm {
 		this.readerPeriod = readerPeriod;
 	}
 
-	public int getNumberOfVehicle() {
-		return numberOfVehicle;
+	public int getNumberOfVehicles() {
+		return numberOfVehicles;
 	}
 
-	public void setNumberOfVehicle(int numberOfVehicle) {
-		this.numberOfVehicle = numberOfVehicle;
+	public void setNumberOfVehicles(int numberOfVehicles) {
+		this.numberOfVehicles = numberOfVehicles;
 	}
 }

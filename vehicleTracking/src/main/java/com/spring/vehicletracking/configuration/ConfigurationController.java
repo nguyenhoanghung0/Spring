@@ -36,7 +36,8 @@ public class ConfigurationController {
 		
 		ConfigurationForm form = new ConfigurationForm(
 				WriterTaskScheduler.getWriterPeriod(),
-				ReaderTaskScheduler.getReaderPeriod());
+				ReaderTaskScheduler.getReaderPeriod(),
+				CommonConstant.NUMBER_OF_VEHICLES);
 		
 		return new ModelAndView("configuration", "configurationForm", form);
 	}
@@ -47,7 +48,7 @@ public class ConfigurationController {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
     	storageService.uploadEventSource(file);
     	
-    	CommonConstant.NUMBER_OF_VEHICLES = form.getNumberOfVehicle();
+    	//CommonConstant.NUMBER_OF_VEHICLES = form.getNumberOfVehicles();
         return "redirect:/#configuration";
     }
     

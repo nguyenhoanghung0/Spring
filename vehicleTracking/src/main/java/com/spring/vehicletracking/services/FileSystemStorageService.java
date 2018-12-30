@@ -29,6 +29,8 @@ public class FileSystemStorageService implements StorageService {
     	List<String> eventList = FileUtil.load(file);
     	logger.debug("Number of event to be adding: " + eventList.size());
     	if (eventList.size() > 0) {
+    		// Validation
+    		
 	    	// Adding all the events in uploaded file to the eventList
     		eventQueue.addAll(eventList);
     	}

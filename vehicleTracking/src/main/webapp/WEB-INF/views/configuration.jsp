@@ -23,19 +23,19 @@
 				
 				<tr>
 					<td><form:label path="numberOfVehicles">Number Of Vehicles:</form:label></td>
-					<td><form:input path="numberOfVehicles" /></td>
+					<td><form:input path="numberOfVehicles" disabled="true" /></td>
 					<td></td>
 				</tr>
 				
 				<tr>
 					<td><form:label path="writerPeriod">Writer Period:</form:label></td>
 					<td><form:input path="writerPeriod" /></td>
-					<td>milliseconds</td>
+					<td>seconds</td>
 				</tr>
 				<tr>
 					<td><form:label path="readerPeriod">Reader Period:</form:label></td>
 					<td ><form:input path="readerPeriod" /></td>
-					<td>milliseconds</td>
+					<td>seconds</td>
 				</tr>
 				<tr>
 					<td><form:label path="">Start services:</form:label></td>

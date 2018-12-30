@@ -1,19 +1,26 @@
 package com.spring.vehicletracking.services;
 
-import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class ReaderTaskScheduler {
 	
-	private static final Timer timer = new Timer();
+	private static final ReaderTask readerTask = new ReaderTask();
 	
-	private static final WriterTask readerTask = new WriterTask();
+	private static int readerPeriod = 10;
 	
-	private static int readerPeriod = 10000;
+	private static ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+	
+	private static ScheduledFuture<?> scheduledFuture;
 	
 	public static void schedulerReaderService() {
 		
-		readerTask.cancel();
-		timer.schedule(readerTask, 0, readerPeriod);
+		if (scheduledFuture != null) scheduledFuture.cancel(false);
+		
+		scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(readerTask, 0, 
+				readerPeriod, TimeUnit.SECONDS);
 	}
 
 	public static int getReaderPeriod() {
