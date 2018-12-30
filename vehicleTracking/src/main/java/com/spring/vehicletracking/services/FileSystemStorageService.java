@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +18,8 @@ import com.spring.vehicletracking.util.FileUtil;
 @Service
 public class FileSystemStorageService implements StorageService {
 
+	private static final Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
+	
 	private static Queue<String> eventQueue = new LinkedList<>();
 	private static final int NUMBER_OF_VEHICLES = 4; // TODO: configurable  
 	
@@ -23,7 +27,7 @@ public class FileSystemStorageService implements StorageService {
     public String uploadEventSource(MultipartFile file) {
     	
     	List<String> eventList = FileUtil.load(file);
-    	
+    	logger.debug("Number of event to be adding: " + eventList.size());
     	if (eventList.size() > 0) {
 	    	// Adding all the events in uploaded file to the eventList
     		eventQueue.addAll(eventList);
@@ -42,12 +46,12 @@ public class FileSystemStorageService implements StorageService {
     			cycleEvents.add(convertToEventObject(line));
     			
     		} catch (NoSuchElementException noElementEx) {
-    			// TODO: handle exception
+    			// No more event in the queue
     			break;
     		} catch (Exception ex) {
-    			// TODO: handle exception
+    			// Something's wrong with the event, skip it
+    			// TODO: handle exception cases
     		}
-    		
     	}
     	
     	return cycleEvents;

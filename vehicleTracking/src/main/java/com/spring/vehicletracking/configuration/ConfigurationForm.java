@@ -1,28 +1,31 @@
 package com.spring.vehicletracking.configuration;
 
 public class ConfigurationForm {
-	private String url;
-	private String excludingString;
+	private int writerPeriod;
+	private int readerPeriod;
 	
 	public ConfigurationForm() {
 		
 	}
 	
-	public ConfigurationForm(String url, String excludingString) {
-		this.url = url;
-		this.excludingString = excludingString;
+	public ConfigurationForm(int writerPeriod, int readerPeriod) {
+		this.writerPeriod = writerPeriod;
+		this.readerPeriod = readerPeriod;
 	}
 
-	public String getUrl() {
-		return url;
+	public int getWriterPeriod() {
+		return writerPeriod;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+
+	public void setWriterPeriod(int writerPeriod) {
+		this.writerPeriod = writerPeriod;
 	}
-	public String getExcludingString() {
-		return excludingString;
+
+	public int getReaderPeriod() {
+		return readerPeriod;
 	}
-	public void setExcludingString(String excludingString) {
-		this.excludingString = excludingString;
+
+	public void setReaderPeriod(int readerPeriod) {
+		this.readerPeriod = readerPeriod;
 	}	
 }

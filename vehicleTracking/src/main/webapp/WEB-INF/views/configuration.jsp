@@ -15,18 +15,30 @@
 		<div>
 			<table>
 				<tr>
-					<td>File to upload:</td>
+					<td><form:label path="">File to upload:</form:label></td>
 					<td><input type="file" name="file" /></td>
-					<td><input type="submit" name="upload" value="Upload" /></td>
+					<td><input type="submit" name="upload" value="Upload" 
+						style="background-color: rgb(99, 177, 117);color:#ffffff"/></td>
+				</tr>
+				
+				<tr>
+					<td><form:label path="writerPeriod">Writer Period:</form:label></td>
+					<td><form:input path="writerPeriod" /></td>
+					<td>milliseconds</td>
 				</tr>
 				<tr>
-					<td>Start Writer/Reader services:</td>
+					<td><form:label path="readerPeriod">Reader Period:</form:label></td>
+					<td ><form:input path="readerPeriod" /></td>
+					<td>milliseconds</td>
+				</tr>
+				<tr>
+					<td><form:label path="">Start services:</form:label></td>
 					<td><button id="start" type="submit" name="start"
 							value="start" style="width: 80px">Start</button></td>
 					<td/>
 				</tr>
 			</table>
-		</div>		
+		</div>
 	</form:form>
 </body>
 </html>

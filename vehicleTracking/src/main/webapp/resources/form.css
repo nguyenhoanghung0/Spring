@@ -8,16 +8,24 @@
 .cleanform {
 	font-size:1em;
     width:60em;
-	color:#1b1b1b;
+	color:#000000;
 	text-align:left;
 	margin:1em auto
+	
 }
 
 /* Elements */
 
+.cleanform button {
+	color: #ffffff;
+	background-color: rgb(99, 177, 117);
+}
+
+
 .cleanform  label,.cleanform legend {
 	padding:0;
-	margin:0.3em 0
+	margin:0.3em 0;
+	color:#004a95;
 }
 
 .cleanform fieldset {
