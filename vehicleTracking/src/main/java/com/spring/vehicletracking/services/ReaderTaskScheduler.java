@@ -4,12 +4,16 @@ import java.util.Timer;
 
 public class ReaderTaskScheduler {
 	
+	private static final Timer timer = new Timer();
+	
+	private static final WriterTask readerTask = new WriterTask();
+	
 	private static int readerPeriod = 10000;
 	
 	public static void schedulerReaderService() {
-		Timer time = new Timer();
-		ReaderTask st = new ReaderTask();
-		time.schedule(st, 0, readerPeriod);
+		
+		readerTask.cancel();
+		timer.schedule(readerTask, 0, readerPeriod);
 	}
 
 	public static int getReaderPeriod() {

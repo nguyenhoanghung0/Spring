@@ -13,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.vehicletracking.services.ReaderTaskScheduler;
 import com.spring.vehicletracking.services.StorageService;
-import com.spring.vehicletracking.services.WriterServiceScheduler;
+import com.spring.vehicletracking.services.WriterTaskScheduler;
+import com.spring.vehicletracking.util.CommonConstant;
 
 
 
@@ -34,49 +35,31 @@ public class ConfigurationController {
 	public ModelAndView configuration() {
 		
 		ConfigurationForm form = new ConfigurationForm(
-				WriterServiceScheduler.getWriterPeriod(),
+				WriterTaskScheduler.getWriterPeriod(),
 				ReaderTaskScheduler.getReaderPeriod());
 		
 		return new ModelAndView("configuration", "configurationForm", form);
 	}
 	
     @RequestMapping(params="upload", method=RequestMethod.POST)
-    public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file) {
+    public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file,
+    		@ModelAttribute("configurationForm") ConfigurationForm form) {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
     	storageService.uploadEventSource(file);
     	
+    	CommonConstant.NUMBER_OF_VEHICLES = form.getNumberOfVehicle();
         return "redirect:/#configuration";
     }
-    
-    /*@RequestMapping(params="writerPeriod", method=RequestMethod.POST)
-    public String updateWriterPeriod(@ModelAttribute("configurationForm") ConfigurationForm form,
-    		ModelAndView model) {
-		
-    	logger.info("Updating Writing Period...");    	
-    	WriterServiceScheduler.setWriterPeriod(form.getWriterPeriod());
-    	
-        return "redirect:/#configuration";
-    }
-    
-    @RequestMapping(params="readerPeriod", method=RequestMethod.POST)
-    public String updateReaderPeriod(@ModelAttribute("configurationForm") ConfigurationForm form,
-    		ModelAndView model) {
-		
-    	logger.info("Updating Reader Period...");    	
-    	//ReaderTaskScheduler
-    	
-        return "redirect:/#configuration";
-    }*/
     
     @RequestMapping(params="start", method=RequestMethod.POST)
     public String startServiceHandler(@ModelAttribute("configurationForm") ConfigurationForm form,
     		ModelAndView model) {
     	
     	logger.info("Writer Period: " + form.getWriterPeriod());    	
-    	WriterServiceScheduler.setWriterPeriod(form.getWriterPeriod());
+    	WriterTaskScheduler.setWriterPeriod(form.getWriterPeriod());
     	
     	logger.info("Starting Writer service...");
-    	WriterServiceScheduler.schedulerWriterService();
+    	WriterTaskScheduler.schedulerWriterService();
     	
     	logger.info("Reader Period: " + form.getWriterPeriod());    	
     	ReaderTaskScheduler.setReaderPeriod(form.getReaderPeriod());

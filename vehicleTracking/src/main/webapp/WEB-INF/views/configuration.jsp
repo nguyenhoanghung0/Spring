@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html;">
 <title>Configuration</title>
 </head>
-<body>
+<body class="home">
 	<form:form id="form" method="POST" class="cleanform" modelAttribute="configurationForm" 
 		enctype="multipart/form-data">
 		
@@ -19,6 +19,12 @@
 					<td><input type="file" name="file" /></td>
 					<td><input type="submit" name="upload" value="Upload" 
 						style="background-color: rgb(99, 177, 117);color:#ffffff"/></td>
+				</tr>
+				
+				<tr>
+					<td><form:label path="numberOfVehicles">Number Of Vehicles:</form:label></td>
+					<td><form:input path="numberOfVehicles" /></td>
+					<td></td>
 				</tr>
 				
 				<tr>

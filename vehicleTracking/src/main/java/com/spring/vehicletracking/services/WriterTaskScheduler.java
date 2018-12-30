@@ -2,14 +2,18 @@ package com.spring.vehicletracking.services;
 
 import java.util.Timer;
 
-public class WriterServiceScheduler {
+public class WriterTaskScheduler {
+	
+	private static final Timer timer = new Timer();
+	
+	private static final WriterTask writerTask = new WriterTask();
 	
 	private static int writerPeriod = 5000;
 	
 	public static void schedulerWriterService() {
-		Timer time = new Timer();
-		WriterTask st = new WriterTask();
-		time.schedule(st, 0, writerPeriod);
+		
+		writerTask.cancel();
+		timer.schedule(writerTask, 0, writerPeriod);
 	}
 	
 	public static void setWriterPeriod(int period) {

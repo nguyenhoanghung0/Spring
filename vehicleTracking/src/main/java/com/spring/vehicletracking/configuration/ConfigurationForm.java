@@ -1,8 +1,10 @@
 package com.spring.vehicletracking.configuration;
 
 public class ConfigurationForm {
+	
 	private int writerPeriod;
 	private int readerPeriod;
+	private int numberOfVehicle;
 	
 	public ConfigurationForm() {
 		
@@ -27,5 +29,13 @@ public class ConfigurationForm {
 
 	public void setReaderPeriod(int readerPeriod) {
 		this.readerPeriod = readerPeriod;
-	}	
+	}
+
+	public int getNumberOfVehicle() {
+		return numberOfVehicle;
+	}
+
+	public void setNumberOfVehicle(int numberOfVehicle) {
+		this.numberOfVehicle = numberOfVehicle;
+	}
 }

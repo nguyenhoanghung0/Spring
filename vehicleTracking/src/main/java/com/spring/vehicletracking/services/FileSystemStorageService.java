@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.spring.vehicletracking.model.Event;
 import com.spring.vehicletracking.model.Event.Action;
+import com.spring.vehicletracking.util.CommonConstant;
 import com.spring.vehicletracking.util.FileUtil;
 
 @Service
@@ -21,7 +22,6 @@ public class FileSystemStorageService implements StorageService {
 	private static final Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
 	
 	private static Queue<String> eventQueue = new LinkedList<>();
-	private static final int NUMBER_OF_VEHICLES = 4; // TODO: configurable  
 	
     @Override
     public String uploadEventSource(MultipartFile file) {
@@ -40,7 +40,7 @@ public class FileSystemStorageService implements StorageService {
     	List<Event> cycleEvents = new ArrayList<>();
     	String line;
     	
-    	for (int i = 1; i <= NUMBER_OF_VEHICLES; i++) {
+    	for (int i = 1; i <= CommonConstant.NUMBER_OF_VEHICLES; i++) {
     		try {
     			line = eventQueue.remove();
     			cycleEvents.add(convertToEventObject(line));
