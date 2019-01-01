@@ -1,4 +1,4 @@
-package com.spring.vehicleTracking.services;
+package com.spring.vehicleTracking.dao;
 
 import static org.junit.Assert.*;
 

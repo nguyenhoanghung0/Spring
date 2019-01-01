@@ -36,6 +36,5 @@
 			<%-- <li><a href="<c:url value="/tripinformation" />" title="tripinformation">Trip Information</a></li> --%>
 		</ul>
 	</div>
-
 </body>
 </html>

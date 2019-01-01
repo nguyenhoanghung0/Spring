@@ -1,10 +1,13 @@
 package com.spring.vehicletracking.configuration;
 
+import java.util.List;
+
 public class ConfigurationForm {
 	
 	private int writerPeriod;
 	private int readerPeriod;
 	private int numberOfVehicles;
+	private String errorList;
 	
 	public ConfigurationForm() {
 		
@@ -39,4 +42,12 @@ public class ConfigurationForm {
 	public void setNumberOfVehicles(int numberOfVehicles) {
 		this.numberOfVehicles = numberOfVehicles;
 	}
+	
+	public String getErrorList() {
+		return errorList;
+	}
+
+	public void setErrorList(String errorList) {
+		this.errorList = errorList;
+	}	
 }

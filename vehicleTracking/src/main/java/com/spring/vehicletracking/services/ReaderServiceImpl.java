@@ -17,9 +17,9 @@ import com.spring.vehicletracking.model.Trip;
 import com.spring.vehicletracking.model.TripStatus;
 
 @Service
-public class ReaderService {
+public class ReaderServiceImpl {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ReaderService.class);
+	private static final Logger logger = LoggerFactory.getLogger(ReaderServiceImpl.class);
 	
 	@Autowired
 	private TripRepository tripRepository;
@@ -51,7 +51,7 @@ public class ReaderService {
 				
 				tripStatus = tripStatusRepository.findByVehicleId(event.getVehicleId());
 				if (tripStatus != null) {
-					// Starting a new trip when last trip not finished yet -> something goes wrong
+					// Start a new trip when last trip not finished yet -> something goes wrong
 					// TODO: Handle exception cases
 				}
 				tripStatus = new TripStatus(event.getVehicleId(), Action.START.toString(),

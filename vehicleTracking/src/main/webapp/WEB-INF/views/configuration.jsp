@@ -20,10 +20,9 @@
 					<td><input type="submit" name="upload" value="Upload" 
 						style="background-color: rgb(99, 177, 117);color:#ffffff"/></td>
 				</tr>
-				
 				<tr>
 					<td><form:label path="numberOfVehicles">Number Of Vehicles:</form:label></td>
-					<td><form:input path="numberOfVehicles" disabled="true" /></td>
+					<td><form:input path="numberOfVehicles" /></td>
 					<td></td>
 				</tr>
 				
@@ -45,6 +44,6 @@
 				</tr>
 			</table>
 		</div>
-	</form:form>
+	</form:form>	
 </body>
 </html>

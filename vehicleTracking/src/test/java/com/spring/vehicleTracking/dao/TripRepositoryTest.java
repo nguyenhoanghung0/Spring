@@ -1,4 +1,4 @@
-package com.spring.vehicleTracking.services;
+package com.spring.vehicleTracking.dao;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.spring.vehicletracking.dao.TripRepository;
@@ -26,7 +27,7 @@ public class TripRepositoryTest {
 		Trip trip = new Trip(1, Duration.ZERO);
 		tripRepository.save(trip);
 		
-		Trip found = tripRepository.findByVehicleId(trip.getVehicleId()).get(0);
+		Trip found = tripRepository.findByVehicleId(PageRequest.of(0, 2), trip.getVehicleId()).get(0);
 		
 		assertEquals(found.getVehicleId(), trip.getVehicleId());
 		assertEquals(found.getDuration(), trip.getDuration());

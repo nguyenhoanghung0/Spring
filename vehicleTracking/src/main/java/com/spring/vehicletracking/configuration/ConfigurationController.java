@@ -1,5 +1,7 @@
 package com.spring.vehicletracking.configuration;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +45,11 @@ public class ConfigurationController {
 	
     @RequestMapping(params="upload", method=RequestMethod.POST)
     public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file,
-    		@ModelAttribute("configurationForm") ConfigurationForm form) {
+    		@ModelAttribute("configurationForm") ConfigurationForm form,
+    		ModelAndView model) {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
-    	fileSystemStorageService.uploadEventSource(file);
+    	
+    	List<String> errorList = fileSystemStorageService.uploadEventSource(file);
     	
     	return "redirect:/#configuration";
     }

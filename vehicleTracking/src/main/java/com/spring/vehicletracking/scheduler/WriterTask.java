@@ -1,7 +1,7 @@
 package com.spring.vehicletracking.scheduler;
 
 import com.spring.vehicletracking.services.EventQueue;
-import com.spring.vehicletracking.services.FileSystemStorageService;
+import com.spring.vehicletracking.services.FileSystemStorageServiceImpl;
 
 /**
  * Read data from the event source file
@@ -11,8 +11,8 @@ import com.spring.vehicletracking.services.FileSystemStorageService;
  */
 public class WriterTask implements Runnable {
 
-	private final FileSystemStorageService fileSystemStorageService = 
-			new FileSystemStorageService();
+	private final FileSystemStorageServiceImpl fileSystemStorageService = 
+			new FileSystemStorageServiceImpl();
 	
 	public void run() {
 		System.out.println("Adding event...");

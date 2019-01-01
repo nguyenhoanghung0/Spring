@@ -17,9 +17,9 @@ import com.spring.vehicletracking.util.CommonConstant;
 import com.spring.vehicletracking.util.FileUtil;
 
 @Service
-public class FileSystemStorageService implements StorageService {
+public class FileSystemStorageServiceImpl implements StorageService {
 
-	private static final Logger logger = LoggerFactory.getLogger(FileSystemStorageService.class);
+	private static final Logger logger = LoggerFactory.getLogger(FileSystemStorageServiceImpl.class);
 	
 	private static Queue<String> eventQueue = new LinkedList<>();
 	

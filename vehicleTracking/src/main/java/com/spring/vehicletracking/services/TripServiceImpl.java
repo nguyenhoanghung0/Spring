@@ -16,7 +16,7 @@ public class TripServiceImpl {
 	@Autowired
 	private TripRepository tripRepository;
 	
-	private static final int pageSize = 2;
+	private static final int pageSize = 3;
 	
 	public List<Trip> findByVehicleId(int vehicleId, int page) {
 		List<Trip> tripList;
