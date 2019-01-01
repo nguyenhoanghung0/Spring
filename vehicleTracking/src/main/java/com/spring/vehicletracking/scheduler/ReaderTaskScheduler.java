@@ -1,4 +1,4 @@
-package com.spring.vehicletracking.services;
+package com.spring.vehicletracking.scheduler;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -30,6 +30,5 @@ public class ReaderTaskScheduler {
 	public static void setReaderPeriod(int readerPeriod) {
 		ReaderTaskScheduler.readerPeriod = readerPeriod;
 	}
-	
-	
+		
 }

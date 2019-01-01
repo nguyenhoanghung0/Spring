@@ -9,7 +9,9 @@ import com.spring.vehicletracking.model.Event;
 
 public class EventQueue {
 	
-	private static Queue<Event> eventQueue = new LinkedList<>();
+	private static final Queue<Event> eventQueue = new LinkedList<>();
+	
+	private EventQueue(){}
 	
 	public static void addEvents(List<Event> list) {
 		eventQueue.addAll(list);

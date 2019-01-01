@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.vehicletracking.services.ReaderTaskScheduler;
+import com.spring.vehicletracking.scheduler.ReaderTaskScheduler;
+import com.spring.vehicletracking.scheduler.WriterTaskScheduler;
 import com.spring.vehicletracking.services.StorageService;
-import com.spring.vehicletracking.services.WriterTaskScheduler;
 import com.spring.vehicletracking.util.CommonConstant;
-
 
 
 @Controller
@@ -24,11 +23,11 @@ public class ConfigurationController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ConfigurationController.class);
 	
-	private final StorageService storageService;
+	private final StorageService fileSystemStorageService;
 
     @Autowired
     public ConfigurationController(StorageService storageService) {
-        this.storageService = storageService;
+        this.fileSystemStorageService = storageService;
     }
     
     @RequestMapping(method=RequestMethod.GET)
@@ -46,10 +45,9 @@ public class ConfigurationController {
     public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file,
     		@ModelAttribute("configurationForm") ConfigurationForm form) {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
-    	storageService.uploadEventSource(file);
+    	fileSystemStorageService.uploadEventSource(file);
     	
-    	//CommonConstant.NUMBER_OF_VEHICLES = form.getNumberOfVehicles();
-        return "redirect:/#configuration";
+    	return "redirect:/#configuration";
     }
     
     @RequestMapping(params="start", method=RequestMethod.POST)

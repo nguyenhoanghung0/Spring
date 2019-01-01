@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.spring.vehicletracking.dao.TripRepository;
 import com.spring.vehicletracking.dao.TripStatusRepository;
@@ -13,19 +15,21 @@ import com.spring.vehicletracking.model.Event;
 import com.spring.vehicletracking.model.Event.Action;
 import com.spring.vehicletracking.model.Trip;
 import com.spring.vehicletracking.model.TripStatus;
-import com.spring.vehicletracking.util.BeanUtil;
 
+@Service
 public class ReaderService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ReaderService.class);
 	
-	private static TripRepository tripRepository = BeanUtil.getBean(TripRepository.class);
-	private static TripStatusRepository tripStatusRepository = 
-			BeanUtil.getBean(TripStatusRepository.class);
+	@Autowired
+	private TripRepository tripRepository;
+	
+	@Autowired
+	private TripStatusRepository tripStatusRepository;
 	
 	private static List<Event> eventList;	
 	
-	public static void processEventInQueue() {
+	public void processEventInQueue() {
 		
 		// Get events from queue
 		eventList = EventQueue.getEvents();

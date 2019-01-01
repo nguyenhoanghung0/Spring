@@ -1,6 +1,5 @@
 package com.spring.vehicletracking.webservice;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.vehicletracking.dao.TripRepository;
 import com.spring.vehicletracking.model.Trip;
+import com.spring.vehicletracking.services.TripServiceImpl;
 
 @RestController
 @RequestMapping("/tripinformation")
@@ -21,18 +20,18 @@ public class TripInformationController {
 	private static final Logger logger = LoggerFactory.getLogger(TripInformationController.class);
 	
 	@Autowired
-	TripRepository tripRepository;
+	TripServiceImpl tripService;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Trip> tripInformation(@RequestParam(value="vehicleId", defaultValue="none") String vehicleId) {
+	public List<Trip> tripInformation(@RequestParam(value="vehicleId", defaultValue="none") String vehicleId, 
+			@RequestParam(value="page", defaultValue="0") Integer page) {
 		
-		logger.debug(vehicleId);
-		List<Trip> trips = new ArrayList<>();
+		logger.debug("vehicleId: " + vehicleId);
+		
 		if (vehicleId.equals("none")) {
-			tripRepository.findAll().forEach(trips::add);
-			return trips;
+			return tripService.findAll(page);
 		} else {
-			return tripRepository.findByVehicleId(Integer.parseInt(vehicleId));
+			return tripService.findByVehicleId(Integer.parseInt(vehicleId), page);
 		}
     }
 }
