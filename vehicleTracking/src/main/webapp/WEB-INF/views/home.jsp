@@ -26,6 +26,25 @@
 		
 			$("#tabs").bind("tabsselect", function(event, ui) { window.location.hash = ui.tab.hash; });
 		});
+		
+		function validate() {
+			var writerPeriod = document.getElementById("writerPeriod");
+            var readerPeriod = document.getElementById("readerPeriod");
+            var errorList = document.getElementById("errorList");
+            var valid = true;
+            
+            if(writerPeriod.value.length<=0 || readerPeriod.value.length<=0) {
+                
+            	errorList.value = "Don't leave the field empty!";
+                valid = false;
+            } else if (isNaN(writerPeriod.value) || isNaN(readerPeriod.value)) {
+                
+            	errorList.value = "Period must be a number!";
+            	valid = false;
+            } 
+            
+            return valid;
+		};
 	</script>
 </head>
 <body class="home">

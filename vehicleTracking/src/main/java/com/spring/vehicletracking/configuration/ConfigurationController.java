@@ -50,7 +50,7 @@ public class ConfigurationController {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
     	
     	List<String> errorList = fileSystemStorageService.uploadEventSource(file);
-    	
+    	form.setErrorList(errorList.toString());
     	return "redirect:/#configuration";
     }
     
