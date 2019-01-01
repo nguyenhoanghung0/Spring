@@ -32,7 +32,7 @@ public class ReaderServiceImpl {
 	public void processEventInQueue() {
 		
 		// Get events from queue
-		eventList = EventQueue.getEvents();
+		eventList = getEventsFromQueue();
 		logger.debug("No. of events: " + eventList.size());
 		
 		// TODO: Save all the events to DB for tracking purpose
@@ -81,5 +81,8 @@ public class ReaderServiceImpl {
 			}
 		}		
 	}
-
+	
+	public List<Event> getEventsFromQueue() {
+		return EventQueue.getEvents();
+	}
 }
