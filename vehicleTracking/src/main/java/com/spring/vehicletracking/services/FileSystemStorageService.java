@@ -24,21 +24,23 @@ public class FileSystemStorageService implements StorageService {
 	private static Queue<String> eventQueue = new LinkedList<>();
 	
     @Override
-    public String uploadEventSource(MultipartFile file) {
+    public List<String> uploadEventSource(MultipartFile file) {
     	
     	List<String> eventList = FileUtil.load(file);
     	logger.debug("Number of event to be adding: " + eventList.size());
     	if (eventList.size() > 0) {
     		// Validation
+    		List<String> errorList = validateInputFile(eventList);
+    		if (errorList.size() > 0) return errorList;
     		
 	    	// Adding all the events in uploaded file to the eventList
     		eventQueue.addAll(eventList);
     	}
     	
-    	return "";
+    	return null;
     }
     
-    public static List<Event> getEventsForOneCycle() {
+    public List<Event> getEventsForOneCycle() {
     	List<Event> cycleEvents = new ArrayList<>();
     	String line;
     	
@@ -59,7 +61,7 @@ public class FileSystemStorageService implements StorageService {
     	return cycleEvents;
     }
     
-    private static Event convertToEventObject(String line) throws Exception {
+    private Event convertToEventObject(String line) throws Exception {
     	
     	String [] array= line.split(",");
     	Event event;
@@ -70,5 +72,25 @@ public class FileSystemStorageService implements StorageService {
     	}
     	
     	return event;
+    }
+    
+    private List<String> validateInputFile(List<String> eventList) {
+    	List<String> errorList = new ArrayList<>();
+    	String line;
+    	String [] lineArray;
+    	
+    	for (int i = 0; i < eventList.size(); i++) {
+    		line = eventList.get(i);
+    		if (line == null || line.isEmpty() ) {
+    			errorList.add("Line " + i + " is null or empty.");
+    		} else {
+    			lineArray = line.split(",");
+    			if (lineArray.length != 2) {
+    				errorList.add("Line " + i + " has wrong format - " + line);
+    			}
+    		}
+    	}
+    	
+    	return errorList;
     }
 }
