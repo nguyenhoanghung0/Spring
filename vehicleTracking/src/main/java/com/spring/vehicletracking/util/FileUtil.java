@@ -21,9 +21,10 @@ public class FileUtil {
 				reader = new BufferedReader(new InputStreamReader(is));
 				line = reader.readLine();
 				listOfLines.add(line);
-				while (line != null) {
+				while (true) {
 					// read next line
 					line = reader.readLine();
+					if (line == null) break;
 					listOfLines.add(line);
 				}
 			} catch (IOException  e) {

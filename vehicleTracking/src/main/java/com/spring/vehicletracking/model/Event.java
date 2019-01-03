@@ -29,6 +29,11 @@ public class Event {
 	public static enum Action {
 	    START, STOP, NONE
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + getVehicleId() + "," + getAction().toString() + "]";
+	}
 }
 
 

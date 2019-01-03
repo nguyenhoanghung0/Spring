@@ -15,7 +15,7 @@ public class ReaderTaskScheduler {
 	
 	private static ScheduledFuture<?> scheduledFuture;
 	
-	public static void schedulerReaderService() {
+	public static synchronized void schedulerReaderService() {
 		
 		if (scheduledFuture != null) scheduledFuture.cancel(false);
 		
@@ -23,7 +23,7 @@ public class ReaderTaskScheduler {
 				readerPeriod, TimeUnit.SECONDS);
 	}
 
-	public static int getReaderPeriod() {
+	public static synchronized int getReaderPeriod() {
 		return readerPeriod;
 	}
 

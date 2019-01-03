@@ -86,7 +86,7 @@ public class FileSystemStorageServiceImpl implements StorageService {
     		} else {
     			lineArray = line.split(",");
     			if (lineArray.length != 2) {
-    				errorList.add("Line " + i + " has wrong format - " + line);
+    				errorList.add("Line " + (i - 1) + " has wrong format - " + line);
     			}
     		}
     	}

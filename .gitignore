@@ -1,2 +1,4 @@
 *.class
 vehicleTracking/target
+\.mvn\\*
+mvnw

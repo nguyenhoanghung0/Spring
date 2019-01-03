@@ -1,10 +1,10 @@
 package com.spring.vehicletracking.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.spring.vehicletracking.model.TripStatus;
 
-public interface TripStatusRepository extends CrudRepository<TripStatus, Long> {
+public interface TripStatusRepository extends PagingAndSortingRepository<TripStatus, Long> {
 	
-	TripStatus findByVehicleId(int vehicleId);
+	TripStatus findByVehicleId(Integer vehicleId);
 }

@@ -40,7 +40,7 @@ public class ConfigurationController {
 				ReaderTaskScheduler.getReaderPeriod(),
 				CommonConstant.NUMBER_OF_VEHICLES);
 		
-		return new ModelAndView("configuration", "configurationForm", form);
+		return new ModelAndView("configurationpage", "configurationForm", form);
 	}
 	
     @RequestMapping(params="upload", method=RequestMethod.POST)
@@ -50,7 +50,7 @@ public class ConfigurationController {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
     	
     	List<String> errorList = fileSystemStorageService.uploadEventSource(file);
-    	form.setErrorList(errorList.toString());
+    	//form.setErrorList(errorList.toString());
     	return "redirect:/#configuration";
     }
     

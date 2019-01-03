@@ -16,8 +16,6 @@ public class Trip {
 
 	private int vehicleId;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int tripNo;
 	private Duration duration;
 	
 	protected Trip() {}
@@ -43,14 +41,6 @@ public class Trip {
 		this.vehicleId = vehicleId;
 	}
 
-	public int getTripNo() {
-		return tripNo;
-	}
-
-	public void setTripNo(int tripNo) {
-		this.tripNo = tripNo;
-	}
-
 	public Duration getDuration() {
 		return duration;
 	}
@@ -63,7 +53,7 @@ public class Trip {
     public String toString() {
         return String.format(
                 "Trip[id=%d, vehicleId='%s', tripNo='%s']",
-                id, vehicleId, tripNo, duration.getSeconds());
+                id, vehicleId, duration.getSeconds());
     }
 
 }
