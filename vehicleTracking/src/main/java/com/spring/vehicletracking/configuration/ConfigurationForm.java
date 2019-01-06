@@ -1,22 +1,30 @@
 package com.spring.vehicletracking.configuration;
 
-import java.util.List;
+import com.spring.vehicletracking.scheduler.ReaderTaskScheduler;
+import com.spring.vehicletracking.scheduler.WriterTaskScheduler;
+import com.spring.vehicletracking.util.CommonConstant;
 
 public class ConfigurationForm {
 	
 	private int writerPeriod;
 	private int readerPeriod;
 	private int numberOfVehicles;
-	private String errorList;
+	private int numberOfRecordsPerPage;
+	private String[] errorList;
 	
 	public ConfigurationForm() {
 		
 	}
 	
-	public ConfigurationForm(int writerPeriod, int readerPeriod, int numberOfVehicles) {
-		this.writerPeriod = writerPeriod;
-		this.readerPeriod = readerPeriod;
-		this.numberOfVehicles = numberOfVehicles;
+	public static ConfigurationForm getInstance() {
+		ConfigurationForm form = new ConfigurationForm();
+		
+		form.writerPeriod = WriterTaskScheduler.getWriterPeriod();
+		form.readerPeriod = ReaderTaskScheduler.getReaderPeriod();
+		form.numberOfVehicles = CommonConstant.NUMBER_OF_VEHICLES;
+		form.numberOfRecordsPerPage = CommonConstant.PAGE_SIZE;
+		
+		return form;
 	}
 
 	public int getWriterPeriod() {
@@ -43,11 +51,19 @@ public class ConfigurationForm {
 		this.numberOfVehicles = numberOfVehicles;
 	}
 	
-	public String getErrorList() {
+	public String [] getErrorList() {
 		return errorList;
 	}
 
-	public void setErrorList(String errorList) {
+	public void setErrorList(String [] errorList) {
 		this.errorList = errorList;
-	}	
+	}
+
+	public int getNumberOfRecordsPerPage() {
+		return numberOfRecordsPerPage;
+	}
+
+	public void setNumberOfRecordsPerPage(int numberOfRecordsPerPage) {
+		this.numberOfRecordsPerPage = numberOfRecordsPerPage;
+	}
 }

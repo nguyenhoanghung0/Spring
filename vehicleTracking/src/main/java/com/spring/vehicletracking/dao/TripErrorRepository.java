@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.spring.vehicletracking.model.Trip;
+import com.spring.vehicletracking.model.TripError;
 
 @Repository
-public interface TripRepository extends PagingAndSortingRepository<Trip, Long> {
+public interface TripErrorRepository extends PagingAndSortingRepository<TripError, Long> {
 
-    List<Trip> findByVehicleId(Pageable pageable, int vehicleId);
+    List<TripError> findByVehicleId(Pageable pageable, int vehicleId);
     
 }

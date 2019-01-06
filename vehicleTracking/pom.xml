@@ -3,9 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.spring</groupId>
-	<artifactId>tripinformation</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>vehicletracking</artifactId>
+	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<!-- <name>Trip Information</name> -->
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>5.1.3.RELEASE</org.springframework-version>		
@@ -144,5 +145,5 @@
             </plugin>
         </plugins>
     </build>
-    <name>Trip Information</name>
+    
 </project>

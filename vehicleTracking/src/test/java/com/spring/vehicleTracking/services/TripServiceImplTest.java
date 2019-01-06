@@ -18,6 +18,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.spring.vehicletracking.dao.TripErrorRepository;
 import com.spring.vehicletracking.dao.TripRepository;
 import com.spring.vehicletracking.model.Trip;
 import com.spring.vehicletracking.services.TripServiceImpl;
@@ -40,6 +41,9 @@ public class TripServiceImplTest {
     @MockBean
     private TripRepository tripRepository;
     
+    @MockBean
+    private TripErrorRepository tripErrorRepository;
+    
     private static int vehicleId = 5;
     List<Trip> tripList = new ArrayList<>();
     List<Trip> fullTripList = new ArrayList<>();
@@ -56,18 +60,18 @@ public class TripServiceImplTest {
         Trip thirdTrip = new Trip(6, Duration.ofMinutes(20));
         fullTripList.add(thirdTrip);
              
-        Mockito.when(tripRepository.findByVehicleId(PageRequest.of(1, 3),
+        Mockito.when(tripRepository.findByVehicleId(PageRequest.of(0, 5),
         		firstTrip.getVehicleId()))
         	.thenReturn(tripList);
         
-        Mockito.when(tripRepository.findAll(PageRequest.of(1, 3)))
+        Mockito.when(tripRepository.findAll(PageRequest.of(0, 5)))
         	.thenReturn(new PageImpl<Trip>(fullTripList));
     }
     
     @Test
     public void findByVehicleIdTest() {
     	
-    	List<Trip> foundList = tripService.findByVehicleId(vehicleId, 1);
+    	List<Trip> foundList = tripService.findByVehicleId(vehicleId, 0);
     	
     	// Should return 2 trips out of total 3 trips 
     	assertEquals(foundList.size(), tripList.size());
@@ -83,7 +87,7 @@ public class TripServiceImplTest {
     
     @Test
     public void findAllTest() {
-    	List<Trip> foundList = tripService.findAll(1);
+    	List<Trip> foundList = tripService.findAll(0);
     	
     	// Should all 3 trips 
     	assertEquals(foundList.size(), fullTripList.size());

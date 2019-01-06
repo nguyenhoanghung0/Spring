@@ -1,5 +1,6 @@
 package com.spring.vehicletracking.scheduler;
 
+import com.spring.vehicletracking.services.ReaderService;
 import com.spring.vehicletracking.services.ReaderServiceImpl;
 
 /**
@@ -8,7 +9,7 @@ import com.spring.vehicletracking.services.ReaderServiceImpl;
  */
 public class ReaderTask implements Runnable {
 	
-	private final ReaderServiceImpl readerService = new ReaderServiceImpl();
+	private final ReaderService readerService = new ReaderServiceImpl();
 	
 	public void run() {
 		System.out.println("Reading event...");

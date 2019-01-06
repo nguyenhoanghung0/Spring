@@ -1,5 +1,6 @@
 package com.spring.vehicletracking.configuration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,31 +33,33 @@ public class ConfigurationController {
         this.fileSystemStorageService = storageService;
     }
     
+    private List<String> errorList = new ArrayList<>();
+    
     @RequestMapping(method=RequestMethod.GET)
 	public ModelAndView configuration() {
 		
-		ConfigurationForm form = new ConfigurationForm(
-				WriterTaskScheduler.getWriterPeriod(),
-				ReaderTaskScheduler.getReaderPeriod(),
-				CommonConstant.NUMBER_OF_VEHICLES);
-		
+    	ConfigurationForm form = ConfigurationForm.getInstance();
+    	form.setErrorList(errorList.toArray(new String [0]));
+    	
 		return new ModelAndView("configurationpage", "configurationForm", form);
 	}
 	
     @RequestMapping(params="upload", method=RequestMethod.POST)
-    public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file,
-    		@ModelAttribute("configurationForm") ConfigurationForm form,
-    		ModelAndView model) {
+    public String fileUploadHandler(@RequestParam(required=false, name="file") MultipartFile file) {
     	logger.info("Uploading file:" + file.getOriginalFilename());    	
     	
-    	List<String> errorList = fileSystemStorageService.uploadEventSource(file);
-    	//form.setErrorList(errorList.toString());
+    	errorList = fileSystemStorageService.uploadEventSource(file);
+    	
     	return "redirect:/#configuration";
     }
     
     @RequestMapping(params="start", method=RequestMethod.POST)
     public String startServiceHandler(@ModelAttribute("configurationForm") ConfigurationForm form,
     		ModelAndView model) {
+    	
+    	errorList = new ArrayList<>();
+    	
+    	CommonConstant.PAGE_SIZE = form.getNumberOfRecordsPerPage();
     	
     	logger.info("Writer Period: " + form.getWriterPeriod());    	
     	WriterTaskScheduler.setWriterPeriod(form.getWriterPeriod());

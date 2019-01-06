@@ -52,7 +52,7 @@ public class Trip {
 	@Override
     public String toString() {
         return String.format(
-                "Trip[id=%d, vehicleId='%s', tripNo='%s']",
+                "Trip[id=%d, vehicleId='%s', duration='%d%n']",
                 id, vehicleId, duration.getSeconds());
     }
 

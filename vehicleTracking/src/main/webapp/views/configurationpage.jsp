@@ -27,7 +27,11 @@
 				<td><form:input path="numberOfVehicles" disabled="true"/></td>
 				<td></td>
 			</tr>
-			
+			<tr>
+				<td><form:label path="numberOfRecordsPerPage">Page Size:</form:label></td>
+				<td><form:input path="numberOfRecordsPerPage" /></td>
+				<td></td>
+			</tr>
 			<tr>
 				<td><form:label path="writerPeriod">Writer Period:</form:label></td>
 				<td><form:input id="writerPeriod" path="writerPeriod" /></td>

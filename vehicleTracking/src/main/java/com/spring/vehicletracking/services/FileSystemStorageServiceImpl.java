@@ -37,7 +37,7 @@ public class FileSystemStorageServiceImpl implements StorageService {
     		eventQueue.addAll(eventList);
     	}
     	
-    	return null;
+    	return new ArrayList<>();
     }
     
     public List<Event> getEventsForOneCycle() {
