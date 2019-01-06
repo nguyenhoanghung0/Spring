@@ -31,11 +31,6 @@
         </dependency>
         <dependency>
 		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-tomcat</artifactId>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-test</artifactId>
 		    <scope>test</scope>		    
 		</dependency>
@@ -45,50 +40,12 @@
 		    <artifactId>hsqldb</artifactId>
 		</dependency>
 		
-		<dependency>
-		  <groupId>org.apache.tomcat.embed</groupId>
-		  <artifactId>tomcat-embed-core</artifactId>
-		  
-		  <scope>compile</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.tomcat.embed</groupId>
-		  <artifactId>tomcat-embed-el</artifactId>
-		  
-		  <scope>compile</scope>
-		</dependency>
-		<dependency>
-		  <groupId>org.apache.tomcat.embed</groupId>
-		  <artifactId>tomcat-embed-websocket</artifactId>
-		  
-		  <scope>compile</scope>
-		</dependency>
-		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<!-- <version>${org.aspectj-version}</version> -->
 		</dependency>	
-		
-		<!-- Logging -->
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency> -->
 		
 		<!-- @Inject -->
 		<dependency>
@@ -113,7 +70,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<!-- <version>1.2</version> -->
+			<!-- <scope>provided</scope> -->
 		</dependency>
 	
 		<!-- Test -->
