@@ -5,7 +5,7 @@ To get the code:
 -------------------
 Clone the repository:
 
-$ git clone git://github.com/nguyenhoanghung0/Spring.git
+      $ git clone git://github.com/nguyenhoanghung0/Spring.git
 
 To run the application:
 -------------------	
