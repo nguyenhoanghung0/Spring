@@ -18,12 +18,12 @@ public class EventQueue {
 	
 	private EventQueue(){}
 	
-	public static void addEvents(List<Event> list) {
+	public static synchronized void addEvents(List<Event> list) {
 		logger.info("Adding " + list.size() + " to eventQueue");
 		eventQueue.addAll(list);
 	}
 	
-	public static List<Event> getEvents() {
+	public static synchronized List<Event> getEvents() {
 		
 		List<Event> eventList = new ArrayList<>();
 		while (!eventQueue.isEmpty()) {
