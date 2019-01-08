@@ -9,10 +9,7 @@ Clone the repository:
 
 To run the application:
 -------------------	
-From the command line with Maven:
-
-      $ cd vehicleTracking
-      $ mvn tomcat:run
+Import the project to eclipse then run it on tomcat
 
 Access to configuration page of the application via http://localhost:8080/vehicleTracking
    - Click on "Start" to start Writer/Reader services
