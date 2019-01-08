@@ -9,7 +9,7 @@
 	<!-- <name>Trip Information</name> -->
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.1.3.RELEASE</org.springframework-version>		
+		<!-- <org.springframework-version>5.1.3.RELEASE</org.springframework-version> -->		
 	</properties>
 	
 	<parent>
@@ -38,6 +38,11 @@
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
 		
 		<dependency>
 		    <groupId>org.hsqldb</groupId>
@@ -52,11 +57,11 @@
 		</dependency>	
 		
 		<!-- @Inject -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
-		</dependency>
+		</dependency> -->
 				
 		<!-- Servlet -->
 		<dependency>
