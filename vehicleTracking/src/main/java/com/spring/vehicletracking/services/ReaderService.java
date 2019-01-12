@@ -6,7 +6,7 @@ import com.spring.vehicletracking.model.Event;
 
 public interface ReaderService {
 	
-	public void processEventInQueue();
+	public void processEventsInQueue();
 	
 	public List<Event> getEventsFromQueue();
 }

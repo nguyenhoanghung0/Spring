@@ -43,9 +43,12 @@
 				<td>seconds</td>
 			</tr>
 			<tr>
-				<td><form:label path="">Start services:</form:label></td>
+				<td><form:label path="">Start/Stop services:</form:label></td>
 				<td><form:button id="start" type="submit" name="start"
-						value="start" style="width: 80px" onclick="return validate();">Start</form:button></td>
+						value="start" style="width: 80px" onclick="return validate();">Start</form:button>
+					<form:button id="stop" type="submit" name="stop" value="stop"
+						style="width: 80px" onclick="return validate();">Stop</form:button>
+				</td>
 				<td/>
 			</tr>
 			<tr>

@@ -3,6 +3,8 @@ package com.spring.vehicletracking.services;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ public class ReaderServiceImpl implements ReaderService {
 	private static List<Event> eventList;	
 	
 	@Override
-	public void processEventInQueue() {
+	public void processEventsInQueue() {
 		
 		// Get events from queue
 		eventList = getEventsFromQueue();
@@ -40,63 +42,76 @@ public class ReaderServiceImpl implements ReaderService {
 		
 		// TODO: Save all the events to DB for tracking purpose
 		
-		// Update Trip Information		
+		ThreadPoolExecutor executor = 
+				  (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+		// Update Trip Information
+		for (Event event : eventList) {
+			executor.submit(() -> {
+				processEvent(event);
+				return null;
+			});
+		}		
+	}
+	
+	private void processEvent(Event event) {
 		Trip trip;
 		TripStatus tripStatus;
-		for (Event event : eventList) {
-			try {
-				if (event.getAction() == Action.NONE) {
-					// do nothing
-					continue;
+		logger.info("Processing event: " + event.getVehicleId() + "||" + event.getAction());
+		
+		try {
+			if (event.getAction() == Action.NONE) {
+				// do nothing
+				logger.info("Finished processing event: " + event.getVehicleId() + "||" + event.getAction());
+				return;
+				
+			} else if (event.getAction() == Action.START) {
+				// Start a new trip
+				logger.info("Vehicle with Id - " + event.getVehicleId() + " starting new trip");
+				
+				tripStatus = tripStatusRepository.findByVehicleId(event.getVehicleId());
+				if (tripStatus != null) {
+					// Start a new trip when last trip not finished yet -> something goes wrong
+					insertTripErrorToDatabase(0L, event.getVehicleId(), 
+							tripStatus.getStartTime(), null);
+				}
+				tripStatus = new TripStatus(event.getVehicleId(), Action.START.toString(),
+						Instant.now());
+				
+				tripStatusRepository.save(tripStatus);
+				
+			} else {
+				// Event STOP - Finish the trip
+				logger.info("Vehicle with Id - " + event.getVehicleId() + " finishing one trip");
+				
+				tripStatus = tripStatusRepository.findByVehicleId(event.getVehicleId());
+				
+				// Update TripRepository
+				if (tripStatus == null) {
+					// Could not find trip status 
+					trip = new Trip(event.getVehicleId(), Duration.ZERO);
+					tripRepository.save(trip);
 					
-				} else if (event.getAction() == Action.START) {
-					// Start a new trip
-					logger.info("Vehicle with Id - " + event.getVehicleId() + " starting new trip");
-					
-					tripStatus = tripStatusRepository.findByVehicleId(event.getVehicleId());
-					if (tripStatus != null) {
-						// Start a new trip when last trip not finished yet -> something goes wrong
-						insertTripErrorToDatabase(0L, event.getVehicleId(), 
-								tripStatus.getStartTime(), null);
-					}
-					tripStatus = new TripStatus(event.getVehicleId(), Action.START.toString(),
-							Instant.now());
-					
-					tripStatusRepository.save(tripStatus);
+					// Insert the exception record to db						
+					insertTripErrorToDatabase(trip.getId(), event.getVehicleId(), 
+							null, Instant.now());
 					
 				} else {
-					// Event STOP - Finish the trip
-					logger.info("Vehicle with Id - " + event.getVehicleId() + " finishing one trip");
-					
-					tripStatus = tripStatusRepository.findByVehicleId(event.getVehicleId());
-					
-					// Update TripRepository
-					if (tripStatus == null) {
-						// Could not find trip status 
-						trip = new Trip(event.getVehicleId(), Duration.ZERO);
-						tripRepository.save(trip);
-						
-						// Insert the exception record to db						
-						insertTripErrorToDatabase(trip.getId(), event.getVehicleId(), 
-								null, Instant.now());
-						
-					} else {
-						trip = new Trip(event.getVehicleId(),
-								Duration.between(tripStatus.getStartTime(), Instant.now()));
-						// Delete from TripStatusRepository
-						tripStatusRepository.delete(tripStatus);
-						tripRepository.save(trip);
-					}
+					trip = new Trip(event.getVehicleId(),
+							Duration.between(tripStatus.getStartTime(), Instant.now()));
+					// Delete from TripStatusRepository
+					tripStatusRepository.delete(tripStatus);
+					tripRepository.save(trip);
 				}
-			} catch (Exception ex) {
-				logger.error("Exception while processiong event: " + event.toString());
-				/*
-				 * - Save error event to db for further investigation
-				 * - Check with resource to recover the data
-				 */
-				insertTripErrorToDatabase(0L, event.getVehicleId(), null, null);
 			}
-		}		
+		} catch (Exception ex) {
+			logger.error("Exception while processiong event: " + event.toString());
+			/*
+			 * - Save error event to db for further investigation
+			 * - Check with resource to recover the data
+			 */
+			insertTripErrorToDatabase(0L, event.getVehicleId(), null, null);
+		}
+		logger.info("Finished processing event: " + event.getVehicleId() + "||" + event.getAction());
 	}
 	
 	private void insertTripErrorToDatabase(long tripId, int vehicleId, 

@@ -17,9 +17,13 @@ public class WriterTaskScheduler {
 	
 	public static void schedulerWriterService() {
 		
-		if (scheduledFuture != null) scheduledFuture.cancel(false);
+		stopScheduledService();
 		scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(writerTask, 0, 
 				writerPeriod, TimeUnit.SECONDS);
+	}
+	
+	public static void stopScheduledService() {
+		if (scheduledFuture != null) scheduledFuture.cancel(false);
 	}
 	
 	public static void setWriterPeriod(int period) {

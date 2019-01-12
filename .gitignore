@@ -2,6 +2,4 @@
 vehicleTracking/target
 vehicleTracking/.mvn/*
 mvnw*
-vehicleTracking/.classpath
-vehicleTracking/.settings
-vehicleTracking/.springBeans
+vehicleTracking/.*

@@ -79,8 +79,8 @@ public class ReaderServiceImplTest {
 	}
 		
 	@Test
-	public void processEventInQueueTest() {
-		readerServiceImpl.processEventInQueue();
+	public void processEventsInQueueTest() {
+		readerServiceImpl.processEventsInQueue();
 		
 		TripStatus foundTripStatus = tripStatusRepository.findByVehicleId(1);
 		assertEquals(foundTripStatus.getVehicleId(), tripStatusVehicle1.getVehicleId());

@@ -15,15 +15,19 @@ public class ReaderTaskScheduler {
 	
 	private static ScheduledFuture<?> scheduledFuture;
 	
-	public static synchronized void schedulerReaderService() {
+	public static void schedulerReaderService() {
 		
-		if (scheduledFuture != null) scheduledFuture.cancel(false);
+		stopScheduledService();
 		
 		scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(readerTask, 0, 
 				readerPeriod, TimeUnit.SECONDS);
 	}
+	
+	public static void stopScheduledService() {
+		if (scheduledFuture != null) scheduledFuture.cancel(false);
+	}
 
-	public static synchronized int getReaderPeriod() {
+	public static int getReaderPeriod() {
 		return readerPeriod;
 	}
 

@@ -13,7 +13,7 @@ public class ReaderTask implements Runnable {
 	
 	public void run() {
 		System.out.println("Reading event...");
-		readerService.processEventInQueue();
+		readerService.processEventsInQueue();
 	}
 }
 

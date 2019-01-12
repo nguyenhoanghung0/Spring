@@ -75,4 +75,11 @@ public class ConfigurationController {
 		
         return "redirect:/#configuration";
     }
+    
+    @RequestMapping(params="stop", method=RequestMethod.POST)
+    public String startServiceHandler() {
+    	WriterTaskScheduler.stopScheduledService();
+    	ReaderTaskScheduler.stopScheduledService();
+    	return "redirect:/#configuration";
+    }
 }
